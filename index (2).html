@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Human Biology II — Practice Exam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16302f;--paper:#fbfaf6;--card:#ffffff;--teal:#0f766e;--teal-soft:#e2f1ef;
+    --line:#e4e2da;--muted:#5d6b6c;--green:#15803d;--green-soft:#e6f4ea;--red:#b3261e;
+    --red-soft:#fae9e8;--amber:#b45309;--shadow:0 1px 2px rgba(22,48,47,.05),0 8px 24px rgba(22,48,47,.06);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:"Mulish",system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:840px;margin:0 auto;padding:28px 20px 120px}
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;letter-spacing:.1px;margin:0}
+  a{color:var(--teal)}
+  .mast{border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:8px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--teal)}
+  .mast h1{font-size:32px;line-height:1.1;margin-top:4px}
+  .mast .sub{color:var(--muted);font-size:14px;margin-top:6px}
+  .note{background:var(--teal-soft);border:1px solid #cbe5e1;border-radius:10px;padding:14px 16px;margin:18px 0;font-size:14px;color:#0c4f49}
+  .note strong{color:var(--ink)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:22px;margin:18px 0}
+  .panel h2{font-size:21px;margin-bottom:4px}
+  .panel .lead{color:var(--muted);font-size:14px;margin-bottom:14px}
+  .topics{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:560px){.topics{grid-template-columns:1fr}}
+  .topic{display:flex;align-items:center;gap:11px;border:1px solid var(--line);border-radius:10px;padding:11px 13px;cursor:pointer;background:#fff;transition:border-color .12s}
+  .topic:hover{border-color:var(--teal)}
+  .topic input{width:18px;height:18px;accent-color:var(--teal);cursor:pointer;flex:none}
+  .topic .tname{font-weight:600;font-size:14.5px}
+  .topic .tcount{margin-left:auto;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .dot{width:9px;height:9px;border-radius:50%;flex:none}
+  .controls{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-top:18px;padding-top:16px;border-top:1px dashed var(--line)}
+  .ctl{display:flex;align-items:center;gap:9px;font-size:14px}
+  .ctl select,.ctl input[type=number]{font-family:inherit;font-size:14px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+  .switch{display:flex;align-items:center;gap:9px;cursor:pointer;font-size:14px;user-select:none}
+  .switch input{width:18px;height:18px;accent-color:var(--teal)}
+  .btn{font-family:inherit;font-weight:700;font-size:15px;border:none;border-radius:10px;padding:13px 22px;cursor:pointer;transition:transform .05s,background .12s}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--teal);color:#fff}
+  .btn-primary:hover{background:#0c5f59}
+  .btn-primary:disabled{opacity:.45;cursor:not-allowed}
+  .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+  .btn-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .btn-small{padding:8px 14px;font-size:13px;font-weight:600}
+  .bar{position:sticky;top:0;z-index:20;background:rgba(251,250,246,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:-28px -20px 18px;padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .bar .prog{flex:1;min-width:140px}
+  .bar .progtrack{height:7px;background:var(--line);border-radius:99px;overflow:hidden}
+  .bar .progfill{height:100%;width:0;background:var(--teal);border-radius:99px;transition:width .25s}
+  .bar .progtext{font-size:12px;color:var(--muted);margin-top:5px;font-variant-numeric:tabular-nums}
+  .timer{font-family:"Newsreader",serif;font-size:22px;font-variant-numeric:tabular-nums;font-weight:600}
+  .timer.low{color:var(--red)}
+  .q{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--qc,var(--teal));border-radius:12px;padding:20px 22px;margin:16px 0;box-shadow:var(--shadow);scroll-margin-top:84px}
+  .qhead{display:flex;align-items:baseline;gap:12px;margin-bottom:12px}
+  .qnum{font-family:"Newsreader",serif;font-size:15px;font-weight:600;color:var(--muted);flex:none}
+  .qtag{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:3px 9px;border-radius:99px;color:#fff;background:var(--qc,var(--teal));flex:none}
+  .qtype{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);flex:none}
+  .qtext{font-size:16.5px;font-weight:600;line-height:1.45;margin-bottom:14px}
+  .opts{display:flex;flex-direction:column;gap:9px}
+  .opt{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--line);border-radius:9px;padding:11px 13px;cursor:pointer;font-size:15px;transition:border-color .1s,background .1s}
+  .opt:hover{border-color:var(--teal)}
+  .opt input{margin-top:2px;accent-color:var(--teal);width:17px;height:17px;flex:none}
+  .opt .lab{font-weight:700;color:var(--muted);flex:none}
+  textarea{width:100%;font-family:inherit;font-size:15px;border:1px solid var(--line);border-radius:9px;padding:12px;min-height:96px;resize:vertical;color:var(--ink)}
+  textarea:focus,.ctl select:focus{outline:2px solid var(--teal);outline-offset:1px}
+  .opt.correct{border-color:var(--green);background:var(--green-soft)}
+  .opt.wrong{border-color:var(--red);background:var(--red-soft)}
+  .opt.correct .lab{color:var(--green)}
+  .opt.wrong .lab{color:var(--red)}
+  .q.locked .opt{cursor:default}
+  .q.locked .opt:hover{border-color:var(--line)}
+  .q.locked .opt.correct:hover{border-color:var(--green)}
+  .q.locked .opt.wrong:hover{border-color:var(--red)}
+  .verdict{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:13px;margin-top:14px;padding:5px 11px;border-radius:99px}
+  .verdict.ok{background:var(--green-soft);color:var(--green)}
+  .verdict.no{background:var(--red-soft);color:var(--red)}
+  .verdict.self{background:#fff5e6;color:var(--amber)}
+  .explain{margin-top:13px;padding:14px 16px;background:#f7f6f1;border:1px solid var(--line);border-radius:10px;font-size:14.5px}
+  .explain .lbl{font-weight:800;font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:5px}
+  .model .lbl{color:var(--amber)}
+  .yt{display:inline-flex;align-items:center;gap:7px;margin-top:12px;font-size:13.5px;font-weight:700;text-decoration:none}
+  .yt svg{flex:none}
+  .selfgrade{margin-top:13px;border-top:1px dashed var(--line);padding-top:13px}
+  .selfgrade .ask{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:9px}
+  .sg-btns{display:flex;gap:8px;flex-wrap:wrap}
+  .sg{font-family:inherit;font-weight:700;font-size:13px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 14px;cursor:pointer}
+  .sg:hover{border-color:var(--teal)}
+  .sg.sel-got{background:var(--green);color:#fff;border-color:var(--green)}
+  .sg.sel-part{background:var(--amber);color:#fff;border-color:var(--amber)}
+  .sg.sel-miss{background:var(--red);color:#fff;border-color:var(--red)}
+  .result{background:var(--ink);color:#fff;border-radius:16px;padding:28px;margin:18px 0;box-shadow:var(--shadow)}
+  .result h2{color:#fff;font-size:24px}
+  .scorebig{font-family:"Newsreader",serif;font-size:64px;font-weight:600;line-height:1;margin:8px 0 2px}
+  .result .meta{color:#bcd2cf;font-size:14px}
+  .bd{margin-top:22px;display:flex;flex-direction:column;gap:10px}
+  .bdrow{display:flex;align-items:center;gap:12px;font-size:14px}
+  .bdrow .bn{width:130px;flex:none;font-weight:600}
+  .bdrow .bt{flex:1;height:8px;background:rgba(255,255,255,.15);border-radius:99px;overflow:hidden}
+  .bdrow .bf{height:100%;border-radius:99px}
+  .bdrow .bp{width:62px;text-align:right;font-variant-numeric:tabular-nums;color:#bcd2cf;flex:none}
+  .foot{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;line-height:1.6}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- SETUP -->
+  <section id="setup">
+    <div class="mast">
+      <div class="eyebrow">Bachelor of Midwifery · Human Biology</div>
+      <h1>Human Biology II — Practice Exam</h1>
+      <div class="sub">Self-marking · multiple choice and short answer · model answers with reasons · YouTube revision links</div>
+    </div>
+
+    <div class="note">
+      <strong>Fresh questions every run.</strong> The real paper is 100 questions in 2 hours. This bank holds multiple versions of every question and serves a different version each time, so you can sit it again and again without memorising the answers. Tick only the topics taught so far, then start.
+    </div>
+
+    <div class="panel">
+      <h2>1. Choose topics</h2>
+      <div class="lead">All selected by default. Untick anything not yet taught. Each count is the number of questions per sitting from that topic.</div>
+      <div class="topics" id="topicList"></div>
+      <div class="btn-row" style="margin-top:14px">
+        <button class="btn btn-ghost btn-small" id="selAll">Select all</button>
+        <button class="btn btn-ghost btn-small" id="selNone">Clear all</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>2. Set the format</h2>
+      <div class="lead">Match it to how you want to practise.</div>
+      <div class="controls">
+        <label class="ctl">Number of questions
+          <select id="numQ">
+            <option value="all">All available</option>
+            <option value="40">40</option>
+            <option value="30">30</option>
+            <option value="20">20</option>
+            <option value="10">10</option>
+          </select>
+        </label>
+        <label class="switch"><input type="checkbox" id="useTimer"> 2-hour timer</label>
+        <label class="switch"><input type="checkbox" id="shuffleOpts" checked> Shuffle answer order</label>
+      </div>
+      <div class="btn-row" style="margin-top:20px">
+        <button class="btn btn-primary" id="startBtn">Start practice exam</button>
+        <span id="availMsg" style="font-size:13px;color:var(--muted)"></span>
+      </div>
+    </div>
+
+    <div class="foot">
+      Study practice only. Always check content against your own lecture notes and course outline, which are the source of truth for what is examinable.
+    </div>
+  </section>
+
+  <!-- EXAM -->
+  <section id="exam" class="hidden">
+    <div class="bar">
+      <div class="prog">
+        <div class="progtrack"><div class="progfill" id="progFill"></div></div>
+        <div class="progtext" id="progText">0 of 0 answered</div>
+      </div>
+      <div class="timer" id="timer">2:00:00</div>
+      <button class="btn btn-primary btn-small" id="markBtn">Mark exam</button>
+    </div>
+    <div id="questions"></div>
+    <div class="btn-row" style="margin-top:18px;justify-content:center">
+      <button class="btn btn-primary" id="markBtn2">Mark exam</button>
+      <button class="btn btn-ghost" id="quitBtn">Back to setup</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* ---------- Topics ---------- */
+const TOPICS = {
+  cell:      {name:"Cells & physiology", colour:"#0f766e"},
+  git:       {name:"Gastrointestinal",   colour:"#b45309"},
+  energy:    {name:"Energy & metabolism", colour:"#9a3412"},
+  nervous:   {name:"Nervous system",     colour:"#6d28d9"},
+  msk:       {name:"Musculoskeletal",    colour:"#a16207"},
+  genetics:  {name:"Genetics",           colour:"#1d4ed8"},
+  neoplasia: {name:"Neoplasia",          colour:"#9f1239"},
+  immune:    {name:"Immune system",      colour:"#0e7490"},
+  vaccine:   {name:"Vaccination",        colour:"#047857"},
+  micro:     {name:"Microbiology",       colour:"#7c2d12"}
+};
+const yt = q => "https://www.youtube.com/results?search_query=" + encodeURIComponent(q);
+const VARIANT_CAP = 10; // engine supports up to 10 versions per question
+
+/* ---------- Item bank ----------
+   Each item = one concept with up to 10 variant versions.
+   One variant is served per sitting and rotates between runs.
+   mc: answer = index of correct option. short: model = model answer.
+----------------------------------- */
+const ITEMS = [
+/* ===== CELLS & PHYSIOLOGY ===== */
+{topic:"cell",variants:[
+ {type:"mc",q:"Homeostasis is best described as the body's ability to:",opts:["Keep its internal environment stable within narrow limits","Stop all chemical reactions when resting","Grow continuously throughout life","Produce identical daughter cells"],answer:0,explain:"Homeostasis keeps internal conditions such as temperature, pH and blood glucose stable despite outside change. The other options describe growth or division.",ytq:"khan academy homeostasis negative feedback"},
+ {type:"mc",q:"Which is the best example of negative feedback?",opts:["Sweating when body temperature rises","Contractions intensifying during labour","Blood clotting amplifying itself","Cells dividing during growth"],answer:0,explain:"Negative feedback opposes a change to restore the set point, like sweating to cool down. Labour and clotting are positive feedback, which amplifies a change.",ytq:"negative positive feedback homeostasis examples"},
+ {type:"short",q:"Define homeostasis and give one example of a variable the body controls this way.",model:"Homeostasis is the maintenance of a stable internal environment within narrow limits despite changes outside the body. It uses receptors, a control centre and effectors in a feedback loop. Examples include body temperature, blood glucose, blood pH and fluid balance. For temperature, getting hot triggers sweating and widening of blood vessels to lose heat and return to about 37 degrees.",ytq:"homeostasis receptor control centre effector explained"}
+]},
+{topic:"cell",variants:[
+ {type:"mc",q:"Which structure is the main site of ATP production in the cell?",opts:["Nucleus","Mitochondria","Ribosome","Golgi apparatus"],answer:1,explain:"Mitochondria run oxidative phosphorylation, which makes most of the cell's ATP. The nucleus stores DNA and ribosomes build proteins.",ytq:"ninja nerd mitochondria function atp"},
+ {type:"mc",q:"Which organelle is often called the powerhouse of the cell?",opts:["Mitochondrion","Lysosome","Nucleus","Ribosome"],answer:0,explain:"The mitochondrion is called the powerhouse because it produces most of the cell's ATP. Lysosomes instead break material down.",ytq:"mitochondria powerhouse of the cell"},
+ {type:"mc",q:"Oxidative phosphorylation, which produces most ATP, occurs in the:",opts:["Mitochondria","Cytoplasm","Nucleus","Cell membrane"],answer:0,explain:"Oxidative phosphorylation happens on the inner mitochondrial membrane and yields the bulk of ATP. Glycolysis in the cytoplasm gives only a small amount.",ytq:"oxidative phosphorylation mitochondria atp yield"}
+]},
+{topic:"cell",variants:[
+ {type:"mc",q:"Which transport process always needs energy from ATP?",opts:["Simple diffusion","Osmosis","Active transport","Facilitated diffusion"],answer:2,explain:"Active transport moves substances against their concentration gradient, so it needs ATP. Diffusion, osmosis and facilitated diffusion are passive.",ytq:"active transport membrane atp"},
+ {type:"mc",q:"Which of these processes does NOT require cellular energy?",opts:["Active transport","The sodium-potassium pump","Facilitated diffusion","Endocytosis"],answer:2,explain:"Facilitated diffusion is passive and moves substances down their gradient through a channel, so it needs no ATP. The other three all use energy.",ytq:"passive vs active transport facilitated diffusion"},
+ {type:"short",q:"Explain the difference between diffusion and active transport.",model:"Diffusion is the passive movement of particles from a high to a low concentration, down the gradient, and needs no energy. It continues until evenly spread. Active transport moves particles the other way, from low to high concentration, against the gradient. Because it works against the gradient it needs energy from ATP and uses carrier proteins. An example is the sodium-potassium pump in nerve cells.",ytq:"diffusion vs active transport difference"}
+]},
+{topic:"cell",variants:[
+ {type:"mc",q:"In osmosis, water moves across a membrane towards the side with:",opts:["Lower solute concentration","Higher solute concentration","Equal solute concentration","More protein channels"],answer:1,explain:"Water moves from low solute (more water) to high solute (less water) to balance concentrations. This is why cells swell or shrink in different solutions.",ytq:"osmosis water movement solute concentration"},
+ {type:"mc",q:"A red blood cell placed in pure water will most likely:",opts:["Swell and may burst","Shrink and shrivel","Stay exactly the same","Turn into bone"],answer:0,explain:"Pure water is hypotonic, so water moves into the cell by osmosis, causing it to swell and possibly burst. In a hypertonic solution it would instead shrink.",ytq:"red blood cell hypotonic hypertonic osmosis"},
+ {type:"mc",q:"A cell placed in a hypertonic solution (more solute outside) will:",opts:["Lose water and shrink","Gain water and swell","Not change at all","Start dividing"],answer:0,explain:"In a hypertonic solution there is more solute outside, so water leaves the cell by osmosis and it shrinks. This is important when giving intravenous fluids.",ytq:"hypertonic solution cell shrink osmosis"}
+]},
+{topic:"cell",variants:[
+ {type:"mc",q:"The plasma membrane is mainly built from a:",opts:["Single layer of protein","Phospholipid bilayer","Sheet of cellulose","Layer of glycogen"],answer:1,explain:"The membrane is a phospholipid bilayer with proteins set within it. Water-loving heads face out and water-fearing tails face in, controlling what crosses.",ytq:"phospholipid bilayer membrane structure"},
+ {type:"mc",q:"In the phospholipid bilayer, the water-fearing (hydrophobic) tails:",opts:["Point inward, away from water","Point outward into the water","Bind oxygen","Store DNA"],answer:0,explain:"The hydrophobic tails point inward, away from the watery fluid on each side, while the hydrophilic heads face the water. This arrangement forms a stable barrier.",ytq:"phospholipid hydrophilic hydrophobic membrane"},
+ {type:"mc",q:"The fluid mosaic model describes the cell membrane as:",opts:["A flexible bilayer with proteins embedded in it","A rigid wall of protein","A solid sheet of sugar","A single layer of fat"],answer:0,explain:"The fluid mosaic model shows a flexible phospholipid bilayer with proteins floating in it like tiles in a mosaic. The proteins control transport and signalling.",ytq:"fluid mosaic model membrane explained"}
+]},
+
+/* ===== GASTROINTESTINAL ===== */
+{topic:"git",variants:[
+ {type:"mc",q:"Most nutrient absorption occurs in the:",opts:["Stomach","Small intestine","Large intestine","Oesophagus"],answer:1,explain:"The small intestine has villi and microvilli giving a huge surface area for absorbing nutrients. The stomach mainly digests and the large intestine reabsorbs water.",ytq:"small intestine absorption villi"},
+ {type:"mc",q:"Which feature of the small intestine increases its surface area for absorption?",opts:["Villi and microvilli","Thick muscular walls","Strong acidity","Bile storage"],answer:0,explain:"Tiny folds called villi and microvilli vastly increase the surface area, so more nutrients can be absorbed into the blood. A rich blood supply carries them away.",ytq:"villi microvilli surface area absorption"},
+ {type:"short",q:"Explain why the small intestine is well suited to absorbing nutrients.",model:"The small intestine is long, which gives time for absorption as food passes through. Its inner wall is folded into villi, and each villus is covered in microvilli, giving an enormous surface area. Each villus has a thin wall and a rich blood and lymph supply, so absorbed nutrients are quickly carried away, keeping the concentration gradient steep. Together these features make absorption fast and efficient.",ytq:"why small intestine good for absorption adaptations"}
+]},
+{topic:"git",variants:[
+ {type:"mc",q:"What is the main function of bile?",opts:["Digest protein into amino acids","Emulsify fats into smaller droplets","Absorb glucose directly","Kill all stomach bacteria"],answer:1,explain:"Bile emulsifies fat, breaking large globules into small droplets so enzymes can work on them. The liver makes bile and the gallbladder stores it. Bile has no enzymes.",ytq:"bile emulsification fat digestion"},
+ {type:"mc",q:"Bile is produced by the ___ and stored in the ___.",opts:["liver; gallbladder","stomach; pancreas","pancreas; liver","gallbladder; spleen"],answer:0,explain:"The liver produces bile continuously and the gallbladder stores and concentrates it, releasing it when fatty food arrives in the small intestine.",ytq:"liver gallbladder bile production storage"},
+ {type:"mc",q:"Bile helps fat digestion by:",opts:["Breaking large fat globules into small droplets","Digesting protein","Absorbing glucose","Producing insulin"],answer:0,explain:"By breaking large fat globules into many small droplets, bile increases the surface area for lipase to act. This speeds up fat digestion.",ytq:"bile emulsify fat surface area lipase"}
+]},
+{topic:"git",variants:[
+ {type:"mc",q:"The enzyme amylase begins the digestion of:",opts:["Proteins","Fats","Carbohydrates","Nucleic acids"],answer:2,explain:"Amylase breaks starch into smaller sugars and starts working in the mouth. Protein needs proteases like pepsin, and fat needs lipase.",ytq:"amylase carbohydrate digestion enzyme"},
+ {type:"mc",q:"Which enzyme begins protein digestion in the stomach?",opts:["Pepsin","Amylase","Lipase","Bile"],answer:0,explain:"Pepsin breaks proteins into smaller chains in the acidic stomach. It is released as inactive pepsinogen and activated by stomach acid.",ytq:"pepsin protein digestion stomach"},
+ {type:"mc",q:"Lipase is the enzyme that digests:",opts:["Fats","Starch","Protein","DNA"],answer:0,explain:"Lipase breaks fats into fatty acids and glycerol. It works best after bile has emulsified the fat into small droplets.",ytq:"lipase fat digestion fatty acids glycerol"}
+]},
+{topic:"git",variants:[
+ {type:"mc",q:"Which cells in the stomach secrete hydrochloric acid?",opts:["Goblet cells","Parietal cells","Chief cells","Paneth cells"],answer:1,explain:"Parietal cells secrete hydrochloric acid, making the stomach strongly acidic. Chief cells release pepsinogen, the inactive form of pepsin.",ytq:"parietal chief cells stomach secretion"},
+ {type:"mc",q:"The strong acid in the stomach is useful because it:",opts:["Kills many microbes and activates pepsin","Absorbs nutrients","Emulsifies fat","Produces bile"],answer:0,explain:"Stomach acid kills many swallowed microbes and provides the low pH that activates pepsin so protein digestion can begin.",ytq:"stomach acid hcl function pepsin"},
+ {type:"mc",q:"Pepsin digests protein and works best in conditions that are:",opts:["Strongly acidic","Strongly alkaline","Neutral","Fat rich"],answer:0,explain:"Pepsin needs the acidic stomach and is activated by acid. In the alkaline small intestine it stops working and other proteases take over.",ytq:"pepsin optimum ph stomach acid"}
+]},
+{topic:"git",variants:[
+ {type:"mc",q:"Peristalsis is best defined as:",opts:["Chemical breakdown of food by enzymes","Wave-like muscle contractions that move food along","Absorption of water in the colon","Storage of bile"],answer:1,explain:"Peristalsis is the rhythmic squeezing of smooth muscle that pushes food through the gut. It is a mechanical, not chemical, process.",ytq:"peristalsis smooth muscle gut motility"},
+ {type:"mc",q:"The main role of the large intestine is to:",opts:["Absorb most fats","Reabsorb water and form faeces","Produce digestive enzymes","Break down protein"],answer:1,explain:"The large intestine reabsorbs water and electrolytes, turning waste into solid faeces, and houses gut bacteria. Most digestion already happened earlier.",ytq:"large intestine colon water absorption"},
+ {type:"short",q:"List, in order, the main structures food passes through from mouth to anus.",model:"Mouth, then pharynx, then oesophagus, then stomach, then small intestine (duodenum, jejunum, ileum), then large intestine (caecum, colon, rectum), then anus. The liver, gallbladder and pancreas are accessory organs that add secretions, but food does not pass through them.",ytq:"path of food digestive system order"}
+]},
+
+/* ===== ENERGY & METABOLISM ===== */
+{topic:"energy",variants:[
+ {type:"mc",q:"ATP is best described as the cell's:",opts:["Genetic blueprint","Main energy currency","Structural protein","Waste product"],answer:1,explain:"ATP stores and delivers energy for cell processes. Breaking its phosphate bond releases energy. DNA is the blueprint, not ATP.",ytq:"atp energy currency cell"},
+ {type:"mc",q:"Energy is released from ATP when:",opts:["A phosphate bond is broken","It binds oxygen","It enters the nucleus","It is stored"],answer:0,explain:"ATP releases energy when a phosphate group is removed, forming ADP. The cell then uses that energy to power its work.",ytq:"atp adp phosphate bond energy release"},
+ {type:"mc",q:"ATP stands for:",opts:["Adenosine triphosphate","Amino transfer protein","Active transport process","Aerobic tissue protein"],answer:0,explain:"ATP is adenosine triphosphate, named for its three phosphate groups. Removing one releases usable energy.",ytq:"what does atp stand for adenosine triphosphate"}
+]},
+{topic:"energy",variants:[
+ {type:"mc",q:"In aerobic respiration, the final electron acceptor is:",opts:["Carbon dioxide","Water","Oxygen","Glucose"],answer:2,explain:"Oxygen accepts electrons at the end of the electron transport chain and combines with hydrogen to form water. Without it, the chain stalls.",ytq:"electron transport chain oxygen final acceptor"},
+ {type:"mc",q:"The waste products of aerobic respiration are:",opts:["Carbon dioxide and water","Oxygen and glucose","Lactic acid only","Protein"],answer:0,explain:"Aerobic respiration uses glucose and oxygen and produces carbon dioxide, water and ATP. The carbon dioxide is breathed out.",ytq:"aerobic respiration products carbon dioxide water"},
+ {type:"short",q:"Why does the body need oxygen to make large amounts of ATP?",model:"Oxygen is the final electron acceptor in the electron transport chain inside mitochondria. It accepts electrons and combines with hydrogen to form water, which keeps the chain running. This allows oxidative phosphorylation to make most of the cell's ATP, around 30 to 32 per glucose. Without oxygen the chain stops, cells switch to anaerobic respiration, and ATP output falls to about 2 per glucose with lactate building up.",ytq:"why oxygen needed for atp aerobic respiration"}
+]},
+{topic:"energy",variants:[
+ {type:"mc",q:"Glycolysis, the first step of glucose breakdown, takes place in the:",opts:["Mitochondrial matrix","Cytoplasm","Nucleus","Cell membrane"],answer:1,explain:"Glycolysis happens in the cytoplasm and needs no oxygen. It splits glucose into two pyruvate molecules. Later aerobic steps occur in mitochondria.",ytq:"glycolysis cytoplasm overview"},
+ {type:"mc",q:"Glycolysis breaks one glucose molecule down into:",opts:["Two pyruvate molecules","Two fat molecules","One amino acid","Water only"],answer:0,explain:"Glycolysis splits the six-carbon glucose into two three-carbon pyruvate molecules, making a small net amount of ATP in the process.",ytq:"glycolysis glucose to pyruvate"},
+ {type:"mc",q:"Glycolysis is able to occur without:",opts:["Oxygen","Glucose","Enzymes","Water"],answer:0,explain:"Glycolysis does not need oxygen, so it can run in anaerobic conditions. It still needs glucose, enzymes and water.",ytq:"glycolysis anaerobic no oxygen"}
+]},
+{topic:"energy",variants:[
+ {type:"mc",q:"Which hormone lowers blood glucose by helping cells take up glucose?",opts:["Glucagon","Insulin","Adrenaline","Cortisol"],answer:1,explain:"Insulin, from pancreatic beta cells, lowers blood glucose by driving uptake into cells. Glucagon does the opposite. This balance matters in pregnancy and diabetes.",ytq:"insulin glucagon blood glucose regulation"},
+ {type:"mc",q:"Which hormone raises blood glucose when levels fall too low?",opts:["Glucagon","Insulin","Oestrogen","Bile"],answer:0,explain:"Glucagon raises blood glucose by signalling the liver to release stored glucose. It opposes insulin to keep levels steady.",ytq:"glucagon raises blood glucose liver"},
+ {type:"mc",q:"Insulin is released by which organ?",opts:["Pancreas","Liver","Kidney","Stomach"],answer:0,explain:"The pancreas releases insulin from its beta cells. Problems with insulin cause diabetes, which is screened for in pregnancy.",ytq:"pancreas insulin beta cells"}
+]},
+{topic:"energy",variants:[
+ {type:"mc",q:"When oxygen is scarce, human muscle cells produce ATP and form:",opts:["Ethanol","Lactic acid (lactate)","Carbon dioxide only","Glycogen"],answer:1,explain:"In low oxygen, muscle uses anaerobic respiration and produces lactate. This keeps ATP forming briefly but builds up and causes fatigue.",ytq:"anaerobic respiration lactic acid muscle"},
+ {type:"mc",q:"Compared with aerobic respiration, anaerobic respiration produces ATP:",opts:["Quickly but in small amounts","Slowly in large amounts","Only with oxygen","Without any enzymes"],answer:0,explain:"Anaerobic respiration makes ATP fast but in tiny amounts, only about 2 per glucose. Aerobic respiration is slower but yields far more.",ytq:"anaerobic vs aerobic atp yield"},
+ {type:"mc",q:"Most ATP from one glucose molecule is generated during:",opts:["Oxidative phosphorylation","Glycolysis","Digestion","Diffusion"],answer:0,explain:"Oxidative phosphorylation in the mitochondria produces the bulk of ATP. Glycolysis gives only a small net yield.",ytq:"oxidative phosphorylation most atp"}
+]},
+
+/* ===== NERVOUS SYSTEM ===== */
+{topic:"nervous",variants:[
+ {type:"mc",q:"The resting membrane potential of a neuron is mainly maintained by the:",opts:["Sodium-potassium pump","Ribosomes","Myelin sheath","Synaptic vesicles"],answer:0,explain:"The sodium-potassium pump moves 3 sodium out and 2 potassium in, keeping the inside negative at rest and setting up the gradient to fire.",ytq:"sodium potassium pump resting potential"},
+ {type:"mc",q:"At rest, the inside of a neuron compared with the outside is:",opts:["More negative","More positive","Exactly equal","Without any charge"],answer:0,explain:"At rest the inside is more negative than the outside, around minus 70 millivolts. This difference is the resting membrane potential.",ytq:"resting membrane potential negative neuron"},
+ {type:"mc",q:"The sodium-potassium pump moves:",opts:["3 sodium out and 2 potassium in","2 sodium in and 3 potassium out","Only water","Only calcium"],answer:0,explain:"The pump exports 3 sodium and imports 2 potassium per cycle, using ATP. This unequal movement helps keep the inside negative.",ytq:"sodium potassium pump 3 sodium 2 potassium"}
+]},
+{topic:"nervous",variants:[
+ {type:"mc",q:"During the depolarisation phase of an action potential, which ion rushes into the neuron?",opts:["Potassium (K+)","Chloride (Cl-)","Sodium (Na+)","Calcium (Ca2+)"],answer:2,explain:"Sodium channels open and Na+ floods in, making the inside positive. This is depolarisation. Potassium then leaves to repolarise.",ytq:"action potential sodium depolarisation"},
+ {type:"mc",q:"Repolarisation of a neuron is caused mainly by:",opts:["Potassium leaving the cell","Sodium entering","Calcium entering","Chloride leaving"],answer:0,explain:"After the peak, potassium channels open and potassium leaves the cell, restoring the negative inside. This is repolarisation.",ytq:"repolarisation potassium efflux action potential"},
+ {type:"short",q:"Describe the main events of an action potential in a neuron.",model:"At rest the inside of the neuron is negative, kept that way by the sodium-potassium pump. When a stimulus reaches threshold, voltage-gated sodium channels open and sodium rushes in, causing depolarisation and a positive inside. Sodium channels then close and potassium channels open, so potassium leaves and the cell repolarises. A brief overshoot causes hyperpolarisation before the cell returns to its resting potential. The impulse then travels along the axon, jumping between nodes if myelinated.",ytq:"action potential steps depolarisation repolarisation"}
+]},
+{topic:"nervous",variants:[
+ {type:"mc",q:"The main role of the myelin sheath is to:",opts:["Produce neurotransmitters","Speed up nerve impulse conduction","Store calcium","Connect bone to muscle"],answer:1,explain:"Myelin insulates the axon so the impulse jumps between nodes of Ranvier. This saltatory conduction is much faster.",ytq:"myelin saltatory conduction speed"},
+ {type:"mc",q:"Loss of myelin, as in multiple sclerosis, would tend to:",opts:["Slow nerve conduction","Speed up conduction","Create new neurons","Stop the heart instantly"],answer:0,explain:"Without myelin, impulses can no longer jump efficiently between nodes, so conduction slows. This causes the symptoms seen in multiple sclerosis.",ytq:"multiple sclerosis demyelination slow conduction"},
+ {type:"mc",q:"The impulse jumps between gaps in the myelin called:",opts:["Nodes of Ranvier","Synapses","Dendrites","Sarcomeres"],answer:0,explain:"Nodes of Ranvier are the bare gaps between myelin segments. The impulse leaps from node to node, which is called saltatory conduction.",ytq:"nodes of ranvier saltatory conduction"}
+]},
+{topic:"nervous",variants:[
+ {type:"mc",q:"Which neurotransmitter is released at the neuromuscular junction to trigger muscle contraction?",opts:["Dopamine","Acetylcholine","Serotonin","GABA"],answer:1,explain:"Acetylcholine crosses the neuromuscular junction and binds receptors on muscle to start contraction. Dopamine and serotonin act mainly in the brain.",ytq:"acetylcholine neuromuscular junction"},
+ {type:"mc",q:"A synapse is the:",opts:["Junction where signals pass between two neurons","Centre of the neuron containing DNA","Fatty layer around the axon","Pump that moves ions"],answer:0,explain:"A synapse is the junction between neurons, usually crossed by chemical neurotransmitters. The signal is electrical along the axon but chemical across the gap.",ytq:"synapse neurotransmitter junction"},
+ {type:"mc",q:"Across most synapses, the signal is carried by:",opts:["Chemical neurotransmitters","Bone","Bile","Light"],answer:0,explain:"At most synapses, neurotransmitters released from one neuron cross the gap and bind receptors on the next, passing the signal on chemically.",ytq:"chemical synapse neurotransmitter signalling"}
+]},
+{topic:"nervous",variants:[
+ {type:"mc",q:"The central nervous system (CNS) consists of the:",opts:["Brain and spinal cord","Nerves of the limbs","Heart and lungs","Sympathetic ganglia only"],answer:0,explain:"The CNS is the brain and spinal cord. The nerves running to the body make up the peripheral nervous system.",ytq:"central peripheral nervous system overview"},
+ {type:"mc",q:"The peripheral nervous system is made up of:",opts:["Nerves outside the brain and spinal cord","The brain only","The spinal cord only","Bones"],answer:0,explain:"The peripheral nervous system is all the nerves outside the CNS. It carries signals to and from the brain and spinal cord.",ytq:"peripheral nervous system nerves explained"},
+ {type:"mc",q:"A neuron that carries signals from sensory receptors towards the CNS is:",opts:["Efferent (motor)","Afferent (sensory)","An interneuron only","A glial cell"],answer:1,explain:"Afferent neurons are sensory and carry signals towards the CNS. A memory aid is afferent arrives, efferent exits.",ytq:"afferent efferent sensory motor neurons"}
+]},
+{topic:"nervous",variants:[
+ {type:"mc",q:"The sympathetic nervous system is mainly responsible for the:",opts:["Rest and digest response","Fight or flight response","Production of bile","Filtering of blood"],answer:1,explain:"The sympathetic system drives fight or flight, raising heart rate and diverting blood to muscles. The parasympathetic system does the opposite.",ytq:"sympathetic fight or flight"},
+ {type:"mc",q:"Which response is driven by the parasympathetic nervous system?",opts:["Rest and digest","Fight or flight","Sprinting from danger","A racing heart in fear"],answer:0,explain:"The parasympathetic system controls rest and digest activities, slowing heart rate and boosting digestion when the body is calm.",ytq:"parasympathetic rest and digest"},
+ {type:"mc",q:"During the fight or flight response, you would expect:",opts:["Increased heart rate","Slowed breathing","Increased digestion","Pupils constricting"],answer:0,explain:"Fight or flight raises heart rate and breathing and widens the pupils, preparing the body for action. Digestion is reduced.",ytq:"fight or flight body changes heart rate"}
+]},
+
+/* ===== MUSCULOSKELETAL ===== */
+{topic:"msk",variants:[
+ {type:"mc",q:"The sliding filament theory of muscle contraction involves which two proteins?",opts:["Collagen and elastin","Actin and myosin","Keratin and albumin","Insulin and glucagon"],answer:1,explain:"Myosin heads pull on actin filaments, sliding them past each other to shorten the muscle. The filaments overlap more rather than shortening themselves.",ytq:"sliding filament actin myosin"},
+ {type:"mc",q:"In the sliding filament theory, during contraction the filaments:",opts:["Slide past each other and overlap more","Physically shorten themselves","Break apart","Turn into bone"],answer:0,explain:"The actin and myosin filaments slide over one another so they overlap more, shortening the sarcomere. The filaments themselves stay the same length.",ytq:"sliding filament sarcomere overlap"},
+ {type:"short",q:"Outline how a muscle shortens according to the sliding filament theory.",model:"A nerve impulse triggers calcium release from the sarcoplasmic reticulum. Calcium exposes binding sites on the actin filaments. Myosin heads attach to actin, forming cross-bridges. Using ATP, the myosin heads pivot and pull the actin filaments towards the centre of the sarcomere. The filaments slide past each other, so the sarcomere and the whole muscle shorten. When calcium is pumped back and stimulation stops, the binding sites are covered again and the muscle relaxes.",ytq:"sliding filament mechanism cross bridge cycle"}
+]},
+{topic:"msk",variants:[
+ {type:"mc",q:"Which ion must be released to trigger muscle contraction?",opts:["Sodium","Calcium","Iron","Potassium"],answer:1,explain:"Calcium is released from the sarcoplasmic reticulum and exposes binding sites on actin, allowing myosin to attach. Pumping it back causes relaxation.",ytq:"calcium muscle contraction troponin"},
+ {type:"mc",q:"The calcium that triggers muscle contraction is released from the:",opts:["Sarcoplasmic reticulum","Nucleus","Mitochondria","Bloodstream only"],answer:0,explain:"The sarcoplasmic reticulum stores calcium and releases it when the muscle is stimulated, starting contraction.",ytq:"sarcoplasmic reticulum calcium release muscle"},
+ {type:"mc",q:"A muscle relaxes when calcium is:",opts:["Pumped back into store","Released into the cell","Replaced by sodium","Bound to oxygen"],answer:0,explain:"When stimulation stops, calcium is pumped back into the sarcoplasmic reticulum. Binding sites are covered again and the muscle relaxes.",ytq:"muscle relaxation calcium reuptake"}
+]},
+{topic:"msk",variants:[
+ {type:"mc",q:"Which bone cells build new bone tissue?",opts:["Osteoclasts","Osteoblasts","Chondrocytes","Erythrocytes"],answer:1,explain:"Osteoblasts build bone by laying down new matrix. Osteoclasts break bone down. A memory aid is osteoBlasts Build, osteoClasts Carve.",ytq:"osteoblast osteoclast bone remodelling"},
+ {type:"mc",q:"Which cells break down (resorb) bone tissue?",opts:["Osteoclasts","Osteoblasts","Red blood cells","Neurons"],answer:0,explain:"Osteoclasts resorb bone, releasing minerals into the blood. Their balance with bone-building osteoblasts keeps the skeleton healthy.",ytq:"osteoclast bone resorption"},
+ {type:"mc",q:"The main job of red bone marrow is to:",opts:["Make blood cells","Produce bile","Store fat only","Filter urine"],answer:0,explain:"Red bone marrow makes blood cells through haematopoiesis, including red cells, white cells and platelets. Bone is more than a structural frame.",ytq:"red bone marrow haematopoiesis"}
+]},
+{topic:"msk",variants:[
+ {type:"mc",q:"Which type of muscle is voluntary and striated?",opts:["Smooth muscle","Cardiac muscle","Skeletal muscle","All are involuntary"],answer:2,explain:"Skeletal muscle is striated and under voluntary control. Cardiac muscle is striated but involuntary, and smooth muscle is neither.",ytq:"skeletal smooth cardiac muscle types"},
+ {type:"mc",q:"Cardiac muscle is:",opts:["Striated and involuntary","Striated and voluntary","Smooth and voluntary","Smooth and involuntary"],answer:0,explain:"Cardiac muscle, found only in the heart, is striated like skeletal muscle but works involuntarily and never tires.",ytq:"cardiac muscle striated involuntary"},
+ {type:"mc",q:"Smooth muscle is found in the:",opts:["Walls of organs like the gut and blood vessels","Heart only","Tissue attached to bone only","Tendons only"],answer:0,explain:"Smooth muscle lines hollow organs such as the gut, bladder and blood vessels. It works involuntarily, for example to move food along.",ytq:"smooth muscle location involuntary organs"}
+]},
+{topic:"msk",variants:[
+ {type:"mc",q:"Tendons connect:",opts:["Bone to bone","Muscle to bone","Muscle to muscle","Nerve to muscle"],answer:1,explain:"Tendons attach muscle to bone so contraction can move the skeleton. Ligaments connect bone to bone and stabilise joints.",ytq:"tendons muscle to bone"},
+ {type:"mc",q:"Ligaments connect:",opts:["Bone to bone","Muscle to bone","Nerve to muscle","Muscle to skin"],answer:0,explain:"Ligaments connect bone to bone and hold joints stable. Tendons, by contrast, connect muscle to bone.",ytq:"ligaments bone to bone joints"},
+ {type:"mc",q:"Cartilage at the ends of bones in a joint helps to:",opts:["Reduce friction and cushion the joint","Make blood cells","Store calcium only","Carry nerve signals"],answer:0,explain:"Smooth cartilage covers the bone ends, reducing friction and absorbing shock so the joint moves freely. Wearing it down causes osteoarthritis.",ytq:"cartilage joint friction cushion"}
+]},
+
+/* ===== GENETICS ===== */
+{topic:"genetics",variants:[
+ {type:"mc",q:"In DNA, which bases pair together?",opts:["A with G, C with T","A with T, G with C","A with C, G with T","Bases pair randomly"],answer:1,explain:"Adenine pairs with thymine and guanine pairs with cytosine. This complementary pairing lets DNA copy itself accurately.",ytq:"dna base pairing rules"},
+ {type:"mc",q:"In RNA, which base replaces thymine?",opts:["Uracil","Cytosine","Guanine","Adenine"],answer:0,explain:"RNA uses uracil instead of thymine, so adenine pairs with uracil in RNA. The other bases stay the same.",ytq:"rna uracil replaces thymine"},
+ {type:"mc",q:"Complementary base pairing is important because it allows DNA to:",opts:["Copy itself accurately","Make ATP","Contract muscle","Digest food"],answer:0,explain:"Because each base only pairs with its partner, each strand acts as a template to build an exact copy during replication.",ytq:"complementary base pairing dna replication"}
+]},
+{topic:"genetics",variants:[
+ {type:"mc",q:"How many chromosomes are in a normal human body (somatic) cell?",opts:["23","46","92","48"],answer:1,explain:"Body cells have 46 chromosomes in 23 pairs. Gametes have only 23, so fertilisation restores the full 46.",ytq:"human chromosomes 46 23 pairs"},
+ {type:"mc",q:"Human gametes (egg and sperm) each contain how many chromosomes?",opts:["23","46","92","22"],answer:0,explain:"Gametes are haploid with 23 chromosomes. When egg and sperm join, the fertilised cell has the full 46.",ytq:"gametes haploid 23 chromosomes"},
+ {type:"mc",q:"Human body cells are described as diploid because they have:",opts:["Two sets of chromosomes","One set of chromosomes","Four sets of chromosomes","No chromosomes"],answer:0,explain:"Diploid means two sets, one from each parent, giving 46 chromosomes in 23 pairs. Gametes are haploid with one set.",ytq:"diploid haploid chromosome sets"}
+]},
+{topic:"genetics",variants:[
+ {type:"mc",q:"Meiosis produces:",opts:["Two identical diploid cells","Four genetically varied haploid cells","One large cell","Identical clones of the parent"],answer:1,explain:"Meiosis makes four haploid gametes that differ genetically, due to crossing over and independent assortment. Mitosis makes two identical diploid cells.",ytq:"meiosis four haploid gametes variation"},
+ {type:"mc",q:"Mitosis produces:",opts:["Two identical diploid cells","Four haploid cells","One haploid cell","Gametes for reproduction"],answer:0,explain:"Mitosis makes two genetically identical diploid cells for growth and repair. Meiosis, by contrast, makes four varied gametes.",ytq:"mitosis two identical diploid cells"},
+ {type:"short",q:"State two key differences between mitosis and meiosis.",model:"Mitosis produces two daughter cells, while meiosis produces four. Mitosis makes diploid cells with 46 chromosomes, while meiosis makes haploid cells with 23. Mitosis produces genetically identical cells for growth and repair, while meiosis produces genetically varied gametes for reproduction. Meiosis also includes crossing over, which mixes genetic material, whereas mitosis does not.",ytq:"mitosis vs meiosis differences"}
+]},
+{topic:"genetics",variants:[
+ {type:"mc",q:"The term genotype refers to:",opts:["The physical appearance of a trait","The genetic makeup (alleles) of an organism","The number of chromosomes only","The location of a gene"],answer:1,explain:"Genotype is the set of alleles an organism carries. Phenotype is how those genes show up physically.",ytq:"genotype phenotype difference alleles"},
+ {type:"mc",q:"Phenotype refers to:",opts:["The physical or observable traits","The alleles carried","The number of chromosomes","The location of a gene"],answer:0,explain:"Phenotype is what you can observe, such as eye colour or height. It results from the genotype and can be affected by the environment.",ytq:"phenotype observable traits genetics"},
+ {type:"mc",q:"Eye colour that you can see is an example of a:",opts:["Phenotype","Genotype","Mutation","Chromosome"],answer:0,explain:"Visible eye colour is a phenotype, the physical expression of the underlying genotype.",ytq:"eye colour phenotype example"}
+]},
+{topic:"genetics",variants:[
+ {type:"mc",q:"For an autosomal recessive condition to appear, a person usually needs:",opts:["One copy of the allele","Two copies of the allele","No copies of the allele","A whole extra chromosome"],answer:1,explain:"Recessive conditions need two copies to show. Someone with one copy is a carrier and usually unaffected. This matters in genetic counselling.",ytq:"autosomal recessive inheritance carrier"},
+ {type:"mc",q:"A person with one copy of a recessive disease allele is usually:",opts:["A healthy carrier","Severely affected","Unable to have children","Immune to all disease"],answer:0,explain:"With only one copy, the person is a carrier and usually shows no symptoms, but can pass the allele to children.",ytq:"recessive carrier healthy unaffected"},
+ {type:"mc",q:"The typical human sex chromosomes are:",opts:["XX in females, XY in males","XY in females, XX in males","XX in both sexes","XY in both sexes"],answer:0,explain:"Females are usually XX and males XY. The sperm carries either an X or a Y, which determines the sex of the offspring.",ytq:"sex chromosomes xx xy"}
+]},
+{topic:"genetics",variants:[
+ {type:"mc",q:"A mutation is best defined as:",opts:["A change in the DNA base sequence","A type of immune cell","The folding of a protein","The splitting of a cell"],answer:0,explain:"A mutation is a change in the DNA sequence. Some are harmless, some cause disease, and some drive cancer or evolution.",ytq:"mutation dna sequence change"},
+ {type:"mc",q:"Copying a gene from DNA into messenger RNA is called:",opts:["Transcription","Translation","Replication","Mutation"],answer:0,explain:"Transcription copies a gene from DNA into mRNA in the nucleus. Translation then reads that mRNA to build a protein.",ytq:"transcription dna to mrna"},
+ {type:"mc",q:"Translation, which builds a protein from mRNA, takes place at the:",opts:["Ribosome","Nucleus","Mitochondrion","Cell membrane"],answer:0,explain:"Ribosomes read the mRNA code and join amino acids into a protein. This stage is called translation.",ytq:"translation ribosome protein synthesis"}
+]},
+
+/* ===== NEOPLASIA ===== */
+{topic:"neoplasia",variants:[
+ {type:"mc",q:"The main feature that makes a tumour malignant rather than benign is that it can:",opts:["Grow slowly in one place","Invade nearby tissue and spread (metastasise)","Be removed by surgery","Stay encapsulated"],answer:1,explain:"Malignant tumours invade surrounding tissue and spread to distant sites. Benign tumours stay local and encapsulated.",ytq:"benign vs malignant tumour difference"},
+ {type:"mc",q:"A benign tumour usually:",opts:["Stays in one place and is encapsulated","Spreads through the blood","Invades nearby organs","Always returns after surgery"],answer:0,explain:"Benign tumours grow slowly, stay in one place with a clear capsule, and do not spread. They are usually less dangerous than malignant tumours.",ytq:"benign tumour features encapsulated"},
+ {type:"short",q:"List three differences between benign and malignant tumours.",model:"Benign tumours grow slowly and stay in one place, while malignant tumours grow faster and invade nearby tissue. Benign tumours do not spread to distant sites, while malignant tumours metastasise through blood or lymph. Benign tumours are usually encapsulated with clear borders, while malignant tumours have irregular, poorly defined edges. Benign cells look close to normal, while malignant cells look abnormal. Benign tumours are rarely fatal unless they press on a vital structure, while malignant tumours can be life threatening.",ytq:"benign malignant tumour differences"}
+]},
+{topic:"neoplasia",variants:[
+ {type:"mc",q:"Metastasis means:",opts:["A tumour shrinking on its own","Cancer spreading from the original site to distant sites","Normal cell repair","A harmless growth"],answer:1,explain:"Metastasis is the spread of cancer cells from the primary tumour to new locations, often via blood or lymph. It makes many cancers hard to treat.",ytq:"metastasis cancer spread explained"},
+ {type:"mc",q:"Cancer cells most commonly spread to distant sites through the:",opts:["Blood and lymph","Nerves only","Bone marrow only","Air"],answer:0,explain:"Cancer cells travel mainly through the bloodstream and lymphatic system to reach distant organs, where they can form secondary tumours.",ytq:"cancer spread blood lymph metastasis"},
+ {type:"mc",q:"The original tumour where a cancer first forms is called the:",opts:["Primary tumour","Secondary tumour","Benign cyst","Metastasis"],answer:0,explain:"The primary tumour is where the cancer starts. Tumours that grow elsewhere from spreading cells are secondary tumours or metastases.",ytq:"primary secondary tumour metastasis"}
+]},
+{topic:"neoplasia",variants:[
+ {type:"mc",q:"A carcinoma is a cancer that arises from which tissue type?",opts:["Epithelial tissue","Muscle tissue","Bone tissue","Blood cells"],answer:0,explain:"Carcinomas arise from epithelial cells, which line surfaces and glands. Sarcomas come from connective tissue and leukaemias from blood cells.",ytq:"carcinoma epithelial tissue origin"},
+ {type:"mc",q:"A cancer arising from connective tissue such as bone or muscle is a:",opts:["Sarcoma","Carcinoma","Leukaemia","Adenoma"],answer:0,explain:"Sarcomas develop from connective tissues like bone, muscle and cartilage. Carcinomas, by contrast, arise from epithelial tissue.",ytq:"sarcoma connective tissue cancer"},
+ {type:"mc",q:"Leukaemia is a cancer of:",opts:["Blood-forming cells","Skin","Bone surface","Nerves"],answer:0,explain:"Leukaemia is cancer of the blood-forming cells in the bone marrow, leading to abnormal white blood cells.",ytq:"leukaemia blood forming cells cancer"}
+]},
+{topic:"neoplasia",variants:[
+ {type:"mc",q:"p53 is best known as a:",opts:["Tumour suppressor gene","Bacterial toxin","Type of antibody","Muscle protein"],answer:0,explain:"p53 is a tumour suppressor that repairs DNA or triggers cell death if damage is severe. Faulty p53 lets damaged cells survive and raises cancer risk.",ytq:"p53 tumour suppressor gene"},
+ {type:"mc",q:"A tumour suppressor gene normally works to:",opts:["Control cell division and repair DNA","Speed up all cell growth","Make antibodies","Build muscle"],answer:0,explain:"Tumour suppressor genes put the brakes on cell division and help fix DNA. When they fail, cells can divide out of control.",ytq:"tumour suppressor gene function"},
+ {type:"mc",q:"An oncogene is a gene that, when faulty, can:",opts:["Drive uncontrolled cell growth","Stop all growth","Make bile","Carry oxygen"],answer:0,explain:"Oncogenes are altered genes that push cells to divide without control, helping cancer develop. They act like a stuck accelerator.",ytq:"oncogene uncontrolled cell growth cancer"}
+]},
+{topic:"neoplasia",variants:[
+ {type:"mc",q:"Neoplasia literally means:",opts:["New, abnormal, uncontrolled growth of cells","Death of cells","Repair of injured tissue","Movement of cells"],answer:0,explain:"Neoplasia is new, uncontrolled cell growth serving no useful purpose. The growth itself is a neoplasm or tumour, benign or malignant.",ytq:"neoplasia definition pathology"},
+ {type:"mc",q:"A carcinogen is something that:",opts:["Increases the risk of cancer","Cures cancer","Builds new bone","Boosts immunity"],answer:0,explain:"A carcinogen raises cancer risk by damaging DNA. Repeated damage can lead to uncontrolled growth.",ytq:"carcinogen dna damage cancer risk"},
+ {type:"mc",q:"Which of these is a common carcinogen?",opts:["Tobacco smoke","Vitamin C","Plain water","Oxygen"],answer:0,explain:"Tobacco smoke contains many chemicals that damage DNA and strongly raise cancer risk. UV radiation is another well-known carcinogen.",ytq:"tobacco smoke carcinogen cancer"}
+]},
+
+/* ===== IMMUNE SYSTEM ===== */
+{topic:"immune",variants:[
+ {type:"mc",q:"Innate immunity differs from adaptive immunity because it is:",opts:["Slow and highly specific","Fast and non-specific","Only present after vaccination","Made only of antibodies"],answer:1,explain:"Innate immunity is the fast, general first response, such as skin, inflammation and phagocytes. Adaptive immunity is slower but specific with memory.",ytq:"innate vs adaptive immunity"},
+ {type:"mc",q:"Adaptive immunity is best described as:",opts:["Slower but specific, with memory","Fast and non-specific","Present only in newborns","Made of skin only"],answer:0,explain:"Adaptive immunity targets specific pathogens using B and T cells and builds memory, so later exposures get a faster response.",ytq:"adaptive immunity specific memory"},
+ {type:"short",q:"Explain the difference between innate and adaptive immunity.",model:"Innate immunity is the body's fast, non-specific first response. It includes barriers like skin, plus inflammation and phagocytes such as macrophages and neutrophils. It does not improve with repeated exposure. Adaptive immunity is slower but highly specific. It involves B cells making antibodies and T cells targeting infected cells. Adaptive immunity also creates memory cells, so a second exposure to the same pathogen produces a faster, stronger response. Vaccination relies on this adaptive memory.",ytq:"innate adaptive immunity compared"}
+]},
+{topic:"immune",variants:[
+ {type:"mc",q:"Antibodies are produced by:",opts:["Red blood cells","B cells (plasma cells)","Platelets","Osteoblasts"],answer:1,explain:"B cells mature into plasma cells that produce antibodies. Antibodies bind specific antigens to mark them for destruction.",ytq:"b cells plasma cells antibodies"},
+ {type:"mc",q:"An antibody works by:",opts:["Binding a specific antigen to mark it for destruction","Digesting food","Carrying oxygen","Building bone"],answer:0,explain:"Each antibody binds a specific antigen, neutralising the pathogen or flagging it so other immune cells destroy it.",ytq:"antibody antigen binding function"},
+ {type:"mc",q:"An antigen is best defined as:",opts:["A molecule that triggers an immune response","A type of red blood cell","A digestive enzyme","A hormone"],answer:0,explain:"An antigen is a molecule, often on a pathogen surface, that the immune system recognises as foreign and responds to.",ytq:"antigen immune recognition"}
+]},
+{topic:"immune",variants:[
+ {type:"mc",q:"Which cells engulf and digest pathogens by phagocytosis?",opts:["Macrophages and neutrophils","Red blood cells","Platelets","Plasma cells"],answer:0,explain:"Macrophages and neutrophils are phagocytes that swallow and digest pathogens. They are key to innate immunity.",ytq:"phagocytosis macrophage neutrophil"},
+ {type:"mc",q:"Phagocytosis is the process of:",opts:["Engulfing and digesting pathogens","Making antibodies","Carrying oxygen","Clotting blood"],answer:0,explain:"In phagocytosis, a cell surrounds and swallows a pathogen, then digests it with enzymes. It is a fast, non-specific defence.",ytq:"phagocytosis process explained"},
+ {type:"mc",q:"Which of these is part of the body's first line of defence?",opts:["Intact skin","Memory cells","Antibodies","T cells"],answer:0,explain:"Skin and other barriers form the first line of defence, stopping pathogens entering. Memory cells, antibodies and T cells act later.",ytq:"first line defence skin barriers"}
+]},
+{topic:"immune",variants:[
+ {type:"mc",q:"Helper T cells (CD4) are important because they:",opts:["Carry oxygen","Coordinate the immune response","Form bone","Produce bile"],answer:1,explain:"Helper T cells coordinate immunity by activating B cells and other T cells. HIV targets these CD4 cells, weakening immunity.",ytq:"helper t cells cd4 coordinate immunity"},
+ {type:"mc",q:"HIV mainly attacks which immune cells, weakening the immune system over time?",opts:["Helper T cells (CD4)","Red blood cells","Platelets","Osteoblasts"],answer:0,explain:"HIV infects and destroys CD4 helper T cells. As their numbers fall, the immune system can no longer coordinate defence properly.",ytq:"hiv cd4 t cells immune"},
+ {type:"mc",q:"Cytotoxic (killer) T cells act by:",opts:["Destroying infected or abnormal cells","Making bile","Carrying oxygen","Storing calcium"],answer:0,explain:"Cytotoxic T cells recognise and kill body cells that are infected by viruses or have turned cancerous.",ytq:"cytotoxic t cells kill infected cells"}
+]},
+{topic:"immune",variants:[
+ {type:"mc",q:"The classic signs of inflammation are redness, heat, swelling and:",opts:["Pain","Weight gain","Hair loss","Numbness"],answer:0,explain:"The four classic signs are redness, heat, swelling and pain, from increased blood flow and immune activity at the site.",ytq:"signs of inflammation redness heat swelling pain"},
+ {type:"mc",q:"Inflammation occurs because of:",opts:["Increased blood flow and immune activity at the site","Loss of all blood supply","Bone growth","Nerve damage only"],answer:0,explain:"During inflammation, blood vessels widen and immune cells gather at the injury, causing the redness, heat, swelling and pain.",ytq:"inflammation increased blood flow immune"},
+ {type:"mc",q:"Pus that forms at an infected wound is mainly made of:",opts:["Dead white blood cells and pathogens","Red blood cells","Bile","Fat"],answer:0,explain:"Pus is a mix of dead white blood cells, destroyed pathogens and tissue debris, a sign the immune system has been fighting infection.",ytq:"pus dead white blood cells infection"}
+]},
+{topic:"immune",variants:[
+ {type:"mc",q:"Memory cells are important because they allow the body to:",opts:["Respond faster and stronger on a second exposure","Forget past infections","Make red blood cells","Digest food"],answer:0,explain:"Memory cells remain after an infection or vaccine and respond quickly if the same pathogen returns. This is the basis of long-term immunity.",ytq:"memory cells secondary response"},
+ {type:"mc",q:"Compared with the first exposure, the secondary immune response is:",opts:["Faster and stronger","Slower and weaker","Identical","Completely absent"],answer:0,explain:"Thanks to memory cells, the second response is faster and stronger, often clearing the pathogen before symptoms appear.",ytq:"primary secondary immune response"},
+ {type:"mc",q:"Why do you usually catch diseases like chickenpox only once?",opts:["Memory cells protect against re-infection","The pathogen disappears forever","Antibiotics cure it","The skin thickens"],answer:0,explain:"After infection, memory cells remain. If the same virus returns, they trigger a fast response that stops illness, giving lasting immunity.",ytq:"why chickenpox once memory immunity"}
+]},
+
+/* ===== VACCINATION ===== */
+{topic:"vaccine",variants:[
+ {type:"mc",q:"Vaccines work mainly by:",opts:["Killing all bacteria in the body","Triggering immune memory without causing the disease","Providing antibodies for life directly","Replacing damaged cells"],answer:1,explain:"A vaccine exposes the immune system to a safe form of an antigen, building memory cells without the person getting sick.",ytq:"how vaccines work immune memory"},
+ {type:"mc",q:"After vaccination, if the real pathogen enters the body, the immune response is:",opts:["Fast and strong due to memory cells","Slow and weak","Completely absent","Always harmful"],answer:0,explain:"Vaccination creates memory cells, so a later real infection meets a fast, strong response that usually prevents illness.",ytq:"vaccine memory cells fast response"},
+ {type:"short",q:"Explain how a vaccine gives a person long-lasting protection against a disease.",model:"A vaccine introduces a safe form of an antigen, such as a weakened, killed or partial pathogen. The immune system treats it as a threat and mounts an adaptive response. B cells make antibodies and the body forms memory B and T cells. The person does not get sick because the antigen cannot cause disease. If the real pathogen later enters the body, the memory cells recognise it and respond quickly and strongly. This faster secondary response usually stops the disease before symptoms develop, giving long-lasting protection.",ytq:"how vaccines create long term immunity"}
+]},
+{topic:"vaccine",variants:[
+ {type:"mc",q:"Herd immunity occurs when:",opts:["Everyone is infected at once","Enough of a population is immune to limit spread","Only newborns are protected","Antibiotics are given widely"],answer:1,explain:"When a high proportion of people are immune, the pathogen struggles to spread, protecting those who cannot be vaccinated.",ytq:"herd immunity explained"},
+ {type:"mc",q:"Herd immunity is important because it helps protect:",opts:["People who cannot be vaccinated","Only those vaccinated","Bacteria","Nobody"],answer:0,explain:"Herd immunity shields vulnerable people, such as newborns or those with weak immune systems, by limiting how far disease can spread.",ytq:"herd immunity protects vulnerable"},
+ {type:"mc",q:"A disease that spreads very easily needs ___ of the population to be immune for herd immunity.",opts:["A higher proportion","A lower proportion","No one","Only newborns"],answer:0,explain:"The more infectious a disease, the higher the share of immune people needed to stop it spreading. Measles, for example, needs a very high level.",ytq:"herd immunity threshold infectious disease"}
+]},
+{topic:"vaccine",variants:[
+ {type:"mc",q:"A live attenuated vaccine contains:",opts:["A weakened but living form of the pathogen","Only ready-made antibodies","A piece of bone","Pure antibiotic"],answer:0,explain:"Live attenuated vaccines use a weakened pathogen that triggers strong immunity but does not usually cause disease.",ytq:"live attenuated vaccine weakened"},
+ {type:"mc",q:"An inactivated vaccine contains:",opts:["Killed pathogen","Living weakened pathogen","Ready-made antibodies","Antibiotics"],answer:0,explain:"Inactivated vaccines use killed pathogens. They are safe but the immune response is often weaker, so boosters may be needed.",ytq:"inactivated killed vaccine boosters"},
+ {type:"mc",q:"Some vaccines require booster doses in order to:",opts:["Top up immunity over time","Cure an existing infection","Replace antibiotics","Add calcium"],answer:0,explain:"Boosters remind the immune system and strengthen memory, keeping protection high as immunity can fade over time.",ytq:"vaccine booster dose immunity"}
+]},
+{topic:"vaccine",variants:[
+ {type:"mc",q:"Vaccination produces which type of immunity?",opts:["Passive immunity","Active immunity","No immunity","Innate immunity only"],answer:1,explain:"Vaccines produce active immunity because the person's own immune system responds and builds memory. Passive immunity is borrowed antibodies.",ytq:"active passive immunity vaccination"},
+ {type:"mc",q:"Which is an example of natural passive immunity, relevant in midwifery?",opts:["A measles vaccine","Antibodies passing from mother to baby via the placenta or breast milk","Getting chickenpox as a child","A tetanus booster"],answer:1,explain:"Maternal antibodies cross the placenta and pass through breast milk, giving the newborn temporary protection without making its own antibodies.",ytq:"passive immunity maternal antibodies newborn breast milk"},
+ {type:"mc",q:"Passive immunity is usually:",opts:["Temporary, because the person does not make their own antibodies","Lifelong","Stronger than active immunity","Only from vaccines"],answer:0,explain:"Passive immunity gives ready-made antibodies, so it acts quickly but fades once they break down, because no memory is formed.",ytq:"passive immunity temporary no memory"}
+]},
+{topic:"vaccine",variants:[
+ {type:"mc",q:"Compared with the first exposure, a second exposure to the same antigen produces a response that is:",opts:["Slower and weaker","Faster and stronger","Exactly the same","Completely absent"],answer:1,explain:"The secondary response is faster and stronger because memory cells already exist. This is why booster doses work.",ytq:"secondary immune response booster"},
+ {type:"mc",q:"A booster dose of a vaccine works by:",opts:["Strengthening memory from earlier doses","Giving antibiotics","Replacing the immune system","Adding red blood cells"],answer:0,explain:"A booster reactivates and strengthens the memory cells built by earlier doses, keeping immunity strong over time.",ytq:"booster dose memory cells vaccine"},
+ {type:"mc",q:"Widespread vaccination has helped to:",opts:["Reduce or eliminate many infectious diseases","Cure all cancers","Replace the need for hygiene","Stop ageing"],answer:0,explain:"Vaccination has dramatically reduced diseases like measles and polio, and smallpox was eradicated worldwide through vaccination.",ytq:"vaccination eradicate reduce disease smallpox"}
+]},
+
+/* ===== MICROBIOLOGY ===== */
+{topic:"micro",variants:[
+ {type:"mc",q:"Bacteria are classified as prokaryotes because they:",opts:["Have no true nucleus","Are larger than human cells","Cannot reproduce","Contain mitochondria"],answer:0,explain:"Prokaryotes like bacteria have no membrane-bound nucleus, so their DNA sits free in the cytoplasm. Human cells are eukaryotes.",ytq:"prokaryote eukaryote bacteria nucleus"},
+ {type:"mc",q:"Human cells differ from bacteria because human cells:",opts:["Have a true nucleus and organelles","Have no DNA","Cannot divide","Are smaller"],answer:0,explain:"Human cells are eukaryotic, with a true nucleus and membrane-bound organelles. Bacteria are prokaryotic and lack these.",ytq:"eukaryote human cell nucleus organelles"},
+ {type:"mc",q:"Bacteria most commonly reproduce by:",opts:["Binary fission","Meiosis","Making gametes","Budding from a host"],answer:0,explain:"Binary fission is simple asexual division where one bacterium splits into two. In good conditions this happens rapidly.",ytq:"binary fission bacterial reproduction"}
+]},
+{topic:"micro",variants:[
+ {type:"mc",q:"Viruses are unable to reproduce unless they:",opts:["Are kept warm","Infect a living host cell","Are exposed to oxygen","Are in salty water"],answer:1,explain:"Viruses have no machinery of their own, so they must hijack a host cell to copy themselves. Outside a host they cannot reproduce.",ytq:"how viruses replicate host cell"},
+ {type:"mc",q:"Outside a living host cell, a virus:",opts:["Cannot reproduce","Reproduces quickly","Makes its own ATP","Divides by fission"],answer:0,explain:"A virus is inert outside a host. It cannot make energy or copy itself and depends entirely on a host cell's machinery.",ytq:"virus inert outside host cell"},
+ {type:"mc",q:"A virus is basically:",opts:["Genetic material inside a protein coat","A small bacterium","A type of fungus","A white blood cell"],answer:0,explain:"A virus is genetic material, DNA or RNA, wrapped in a protein coat. It is not a cell and cannot live independently.",ytq:"virus structure genetic material protein coat"}
+]},
+{topic:"micro",variants:[
+ {type:"mc",q:"Antibiotics are effective against:",opts:["Viruses","Bacteria","All microbes equally","Human cells"],answer:1,explain:"Antibiotics target bacterial structures such as cell walls, so they do not work on viruses. Overuse drives resistance.",ytq:"antibiotics work on bacteria not viruses"},
+ {type:"mc",q:"Why do antibiotics not work against viruses?",opts:["Viruses lack the structures antibiotics target","Viruses are too big","Antibiotics are too weak","Viruses are not harmful"],answer:0,explain:"Antibiotics attack features unique to bacteria, like the cell wall. Viruses do not have these, so antibiotics have nothing to act on.",ytq:"why antibiotics dont work on viruses"},
+ {type:"short",q:"Explain why antibiotics treat bacterial infections but not viral infections.",model:"Antibiotics work by targeting structures and processes that bacteria have but human cells and viruses do not, such as the bacterial cell wall, bacterial ribosomes or DNA-copying enzymes. This lets antibiotics kill or stop bacteria without harming the patient's own cells. Viruses do not have these structures. They are not cells and they replicate inside host cells using the host's own machinery. So antibiotics have no target in a virus, which is why they do not help with colds or flu. Misusing antibiotics for viral infections also encourages antibiotic resistance.",ytq:"antibiotics bacteria not viruses explained"}
+]},
+{topic:"micro",variants:[
+ {type:"mc",q:"The Gram stain separates bacteria based mainly on their:",opts:["Size only","Cell wall structure","Colour in daylight","Ability to move"],answer:1,explain:"Gram-positive bacteria have a thick peptidoglycan wall and stain purple. Gram-negative bacteria have a thinner wall and stain pink.",ytq:"gram stain cell wall positive negative"},
+ {type:"mc",q:"Gram-positive bacteria stain ___ because of their thick peptidoglycan cell wall.",opts:["Purple","Pink","Green","Yellow"],answer:0,explain:"The thick peptidoglycan wall of Gram-positive bacteria traps the crystal violet dye, so they appear purple under the microscope.",ytq:"gram positive purple peptidoglycan"},
+ {type:"mc",q:"Antibiotic resistance is made worse by:",opts:["Overusing or misusing antibiotics","Using them exactly as prescribed","Vaccination","Hand washing"],answer:0,explain:"Overuse and misuse, such as not finishing a course or using antibiotics for viral colds, let resistant bacteria survive and spread.",ytq:"antibiotic resistance overuse misuse"}
+]},
+{topic:"micro",variants:[
+ {type:"mc",q:"The normal flora (microbiome) of the body is useful because it:",opts:["Always causes disease","Helps digestion and competes with harmful microbes","Replaces white blood cells","Produces bile"],answer:1,explain:"Normal flora helps digest food, makes some vitamins and crowds out harmful microbes. Disturbing it, for example with antibiotics, can cause problems.",ytq:"normal flora microbiome benefits"},
+ {type:"mc",q:"Which of these lists groups of microorganisms?",opts:["Bacteria, viruses, fungi and protozoa","Only bacteria","Only viruses","Red and white blood cells"],answer:0,explain:"Microorganisms include bacteria, viruses, fungi and protozoa. Each group differs in structure and needs a different treatment.",ytq:"types of microorganisms bacteria virus fungi protozoa"},
+ {type:"mc",q:"A common fungal infection in humans is:",opts:["Thrush (Candida)","Influenza","Tuberculosis","Malaria"],answer:0,explain:"Thrush is caused by the fungus Candida. Influenza is viral, tuberculosis is bacterial and malaria is caused by a protozoan.",ytq:"candida thrush fungal infection"}
+]}
+];
+
+/* ---------- State ---------- */
+let session=[];
+let started=0;
+let timerId=null;
+let secondsLeft=0;
+let marked=false;
+const lastVar={}; // itemIndex -> last variant index used (rotates between runs)
+
+/* ---------- Setup screen ---------- */
+const topicList=document.getElementById('topicList');
+function itemCounts(){const c={};ITEMS.forEach(it=>c[it.topic]=(c[it.topic]||0)+1);return c;}
+function renderTopics(){
+  const c=itemCounts();
+  topicList.innerHTML='';
+  Object.keys(TOPICS).forEach(k=>{
+    const t=TOPICS[k];
+    const lab=document.createElement('label');
+    lab.className='topic';
+    lab.innerHTML=`<input type="checkbox" data-topic="${k}" checked>
+      <span class="dot" style="background:${t.colour}"></span>
+      <span class="tname">${t.name}</span>
+      <span class="tcount">${c[k]||0} Q</span>`;
+    topicList.appendChild(lab);
+  });
+  topicList.querySelectorAll('input').forEach(i=>i.addEventListener('change',updateAvail));
+  updateAvail();
+}
+function selectedTopics(){return [...topicList.querySelectorAll('input:checked')].map(i=>i.dataset.topic);}
+function updateAvail(){
+  const sel=selectedTopics();
+  const n=ITEMS.filter(it=>sel.includes(it.topic)).length;
+  document.getElementById('availMsg').textContent=n+' question'+(n===1?'':'s')+' per sitting';
+  document.getElementById('startBtn').disabled=n===0;
+}
+document.getElementById('selAll').onclick=()=>{topicList.querySelectorAll('input').forEach(i=>i.checked=true);updateAvail();};
+document.getElementById('selNone').onclick=()=>{topicList.querySelectorAll('input').forEach(i=>i.checked=false);updateAvail();};
+
+/* ---------- Helpers ---------- */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const LETTERS=['A','B','C','D','E','F'];
+function pickVariant(itemIdx,len){
+  if(len<=1)return 0;
+  const cap=Math.min(len,VARIANT_CAP);
+  let choices=[];
+  for(let i=0;i<cap;i++) if(i!==lastVar[itemIdx]) choices.push(i);
+  const pick=choices[Math.floor(Math.random()*choices.length)];
+  lastVar[itemIdx]=pick;
+  return pick;
+}
+
+/* ---------- Start ---------- */
+document.getElementById('startBtn').onclick=startExam;
+function startExam(){
+  const sel=selectedTopics();
+  let pool=ITEMS.map((it,idx)=>({it,idx})).filter(o=>sel.includes(o.it.topic));
+  pool=shuffle(pool);
+  const numSel=document.getElementById('numQ').value;
+  if(numSel!=='all') pool=pool.slice(0,Math.min(parseInt(numSel),pool.length));
+  const shuf=document.getElementById('shuffleOpts').checked;
+
+  session=pool.map((o,i)=>{
+    const vi=pickVariant(o.idx,o.it.variants.length);
+    const v=o.it.variants[vi];
+    const obj={topic:o.it.topic,type:v.type,q:v.q,ytq:v.ytq,qid:i};
+    if(v.type==='mc'){
+      obj.opts=v.opts;obj.explain=v.explain;
+      const order=shuf?shuffle(v.opts.map((_,k)=>k)):v.opts.map((_,k)=>k);
+      obj.order=order;obj.correctPos=order.indexOf(v.answer);obj.chosen=null;
+    }else{
+      obj.model=v.model;obj.self=null;obj.answered=false;
+    }
+    return obj;
+  });
+
+  marked=false;
+  document.getElementById('setup').classList.add('hidden');
+  document.getElementById('exam').classList.remove('hidden');
+  renderQuestions();
+  started=Date.now();
+  setupTimer();
+  window.scrollTo(0,0);
+}
+
+/* ---------- Timer ---------- */
+function setupTimer(){
+  const on=document.getElementById('useTimer').checked;
+  const tEl=document.getElementById('timer');
+  if(!on){tEl.style.display='none';return;}
+  tEl.style.display='';
+  secondsLeft=2*60*60;paintTimer();
+  timerId=setInterval(()=>{secondsLeft--;paintTimer();if(secondsLeft<=0){clearInterval(timerId);if(!marked)markExam();}},1000);
+}
+function paintTimer(){
+  const h=Math.floor(secondsLeft/3600),m=Math.floor((secondsLeft%3600)/60),s=secondsLeft%60;
+  const tEl=document.getElementById('timer');
+  tEl.textContent=`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  tEl.classList.toggle('low',secondsLeft<=300);
+}
+
+/* ---------- Render ---------- */
+function renderQuestions(){
+  const wrap=document.getElementById('questions');
+  wrap.innerHTML='';
+  session.forEach((q,i)=>{
+    const t=TOPICS[q.topic];
+    const card=document.createElement('div');
+    card.className='q';card.id='q'+i;card.style.setProperty('--qc',t.colour);
+    let inner=`<div class="qhead">
+        <span class="qnum">Q${i+1}</span>
+        <span class="qtag">${t.name}</span>
+        <span class="qtype">${q.type==='mc'?'Multiple choice':'Short answer'}</span>
+      </div>
+      <div class="qtext">${q.q}</div>`;
+    if(q.type==='mc'){
+      inner+='<div class="opts">';
+      q.order.forEach((origIdx,pos)=>{
+        inner+=`<label class="opt" data-pos="${pos}">
+          <input type="radio" name="q${i}" value="${pos}">
+          <span class="lab">${LETTERS[pos]}</span>
+          <span class="otext">${q.opts[origIdx]}</span></label>`;
+      });
+      inner+='</div>';
+    }else{
+      inner+=`<textarea placeholder="Type your answer here, then mark the exam to compare with the model answer..."></textarea>`;
+    }
+    card.innerHTML=inner;
+    wrap.appendChild(card);
+    if(q.type==='mc'){
+      card.querySelectorAll('input[type=radio]').forEach(r=>r.addEventListener('change',e=>{q.chosen=parseInt(e.target.value);updateProgress();}));
+    }else{
+      card.querySelector('textarea').addEventListener('input',e=>{q.answered=e.target.value.trim().length>0;updateProgress();});
+    }
+  });
+  updateProgress();
+}
+function updateProgress(){
+  const done=session.filter(q=>q.type==='mc'?q.chosen!==null:q.answered).length;
+  const pct=session.length?Math.round(done/session.length*100):0;
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progText').textContent=`${done} of ${session.length} answered`;
+}
+
+/* ---------- Mark ---------- */
+document.getElementById('markBtn').onclick=markExam;
+document.getElementById('markBtn2').onclick=markExam;
+function markExam(){
+  if(marked)return;marked=true;
+  if(timerId)clearInterval(timerId);
+  session.forEach((q,i)=>{
+    const card=document.getElementById('q'+i);
+    card.classList.add('locked');
+    if(q.type==='mc'){
+      card.querySelectorAll('.opt').forEach((opt,pos)=>{
+        opt.querySelector('input').disabled=true;
+        if(pos===q.correctPos)opt.classList.add('correct');
+        if(q.chosen===pos&&pos!==q.correctPos)opt.classList.add('wrong');
+      });
+      const ok=q.chosen===q.correctPos;
+      const v=document.createElement('div');
+      v.className='verdict '+(ok?'ok':'no');
+      v.textContent=q.chosen===null?'Not answered — correct answer shown':(ok?'Correct':'Not quite');
+      card.appendChild(v);addExplain(card,q);
+    }else{
+      card.querySelector('textarea').disabled=true;
+      const v=document.createElement('div');v.className='verdict self';
+      v.textContent='Compare with the model answer below';
+      card.appendChild(v);addModel(card,q);
+    }
+  });
+  showResults();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function ytLink(q){
+  return `<a class="yt" href="${yt(q.ytq)}" target="_blank" rel="noopener">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="#b3261e"><path d="M23 12s0-3.8-.5-5.6a2.9 2.9 0 0 0-2-2C18.7 4 12 4 12 4s-6.7 0-8.5.4a2.9 2.9 0 0 0-2 2C1 8.2 1 12 1 12s0 3.8.5 5.6a2.9 2.9 0 0 0 2 2C5.3 20 12 20 12 20s6.7 0 8.5-.4a2.9 2.9 0 0 0 2-2C23 15.8 23 12 23 12ZM9.8 15.3V8.7l6 3.3-6 3.3Z"/></svg>
+    Watch revision videos</a>`;
+}
+function addExplain(card,q){
+  const e=document.createElement('div');e.className='explain';
+  e.innerHTML=`<span class="lbl">Why</span>${q.explain}${ytLink(q)}`;
+  card.appendChild(e);
+}
+function addModel(card,q){
+  const e=document.createElement('div');e.className='explain model';
+  e.innerHTML=`<span class="lbl">Model answer</span>${q.model}${ytLink(q)}
+    <div class="selfgrade"><div class="ask">Mark your own answer against this:</div>
+      <div class="sg-btns">
+        <button class="sg" data-v="1">Got it</button>
+        <button class="sg" data-v="0.5">Partly right</button>
+        <button class="sg" data-v="0">Missed it</button>
+      </div></div>`;
+  card.appendChild(e);
+  const btns=e.querySelectorAll('.sg');
+  btns.forEach(b=>b.addEventListener('click',()=>{
+    q.self=parseFloat(b.dataset.v);
+    btns.forEach(x=>x.classList.remove('sel-got','sel-part','sel-miss'));
+    b.classList.add(q.self===1?'sel-got':q.self===0.5?'sel-part':'sel-miss');
+    updateResults();
+  }));
+}
+
+/* ---------- Results ---------- */
+function calc(){
+  let pts=0;const total=session.length;const byTopic={};
+  session.forEach(q=>{
+    let s=q.type==='mc'?(q.chosen===q.correctPos?1:0):(q.self!==null?q.self:0);
+    pts+=s;
+    if(!byTopic[q.topic])byTopic[q.topic]={pts:0,n:0};
+    byTopic[q.topic].pts+=s;byTopic[q.topic].n++;
+  });
+  return {pts,total,byTopic};
+}
+let resultEl=null;
+function showResults(){
+  resultEl=document.createElement('div');resultEl.className='result';
+  document.getElementById('exam').insertBefore(resultEl,document.querySelector('#exam .bar').nextSibling);
+  updateResults();
+}
+function updateResults(){
+  if(!resultEl)return;
+  const {pts,total,byTopic}=calc();
+  const pct=total?Math.round(pts/total*100):0;
+  const mins=Math.round((Date.now()-started)/60000);
+  const pending=session.some(q=>q.type==='short'&&q.self===null);
+  let bd='';
+  Object.keys(TOPICS).forEach(k=>{
+    if(byTopic[k]){const b=byTopic[k];const p=Math.round(b.pts/b.n*100);
+      bd+=`<div class="bdrow"><span class="bn">${TOPICS[k].name}</span>
+        <span class="bt"><span class="bf" style="width:${p}%;background:${TOPICS[k].colour}"></span></span>
+        <span class="bp">${p}% · ${b.n}Q</span></div>`;}
+  });
+  resultEl.innerHTML=`<h2>Your result</h2>
+    <div class="scorebig">${pct}%</div>
+    <div class="meta">${(+pts.toFixed(1))} of ${total} marks${document.getElementById('useTimer').checked?` · finished in ${mins} min`:''}
+      ${pending?'<br>Self-mark your short answers above to update this score':''}</div>
+    <div class="bd">${bd}</div>`;
+}
+
+/* ---------- Quit ---------- */
+document.getElementById('quitBtn').onclick=()=>{
+  if(timerId)clearInterval(timerId);
+  document.getElementById('exam').classList.add('hidden');
+  document.getElementById('setup').classList.remove('hidden');
+  if(resultEl){resultEl.remove();resultEl=null;}
+  window.scrollTo(0,0);
+};
+
+renderTopics();
+</script>
+</body>
+</html>
